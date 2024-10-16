@@ -4,13 +4,45 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 0 0% 0%;
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 0%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
@@ -34,349 +66,58 @@
   }
 }
 
-/* text-reveal */
-.text-reveal {
-  transform: translateY(115px);
-  transition: transform 0.5s;
-}
-.text-reveal__container {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-  line-height: 1.5rem;
-}
-.text-reveal__negative {
-  transform: translateY(-115px);
-  transition: transform 0.5s;
-}
-.text-reveal__fade-in {
-  animation: fadeInAnimation ease 2.5s;
-  animation-iteration-count: 1;
-}
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
+@layer base {
+  * {
+    @apply border-border;
   }
-  100% {
-    opacity: 1;
+  body {
+    @apply bg-background text-foreground;
   }
-}
-
-/* Lenis */
-html.lenis {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
-
-/* loader */
-.loader {
-  animation: scaleOutAnimation ease 1.5s;
-  animation-delay: 3.5s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-@keyframes scaleOutAnimation {
-  0% {
-    scale: 1;
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
-  100% {
-    scale: 0;
+  .flex-center {
+    @apply flex items-center justify-center;
   }
-}
-
-/* spotify */
-.spotify-logo {
-  transition: transform 0.5s ease;
-}
-
-.spotify-playlist {
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  opacity: 0;
-  transform: translateY(-200%);
-}
-
-.spotify-logo.hovered {
-  transform: translateY(-200%);
-}
-
-.spotify-playlist.hovered {
-  opacity: 1;
-  transform: translateY(0%);
-}
-
-@media (max-width: 425px) {
-  .hero-spotify {
-    width: 100%;
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
   }
-}
-
-@media (min-width: 350px) {
-  .time {
-    display: inline;
+  .grid-center {
+    @apply grid place-items-center;
   }
-}
-
-.header-text {
-  color: #a3a3a3;
-  font-weight: 500;
-  font-size: 3.456rem;
-  line-height: 1;
-}
-
-@media (max-width: 320px) {
-  .header-text {
-    font-size: 3rem;
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
   }
-}
-
-@media (min-width: 600px) {
-  .header-text {
-    font-size: 4.5rem;
+  .no-focusing {
+    @apply focus-visible:ring-0 focus-visible:outline-none;
   }
-}
-
-@media (min-width: 768px) {
-  .header-text {
-    font-size: 6rem;
+  .truncate-w-bg {
+    @apply overflow-x-hidden flex flex-shrink h-fit whitespace-nowrap bg-inherit;
   }
-}
-
-@media (min-width: 1024px) {
-  .header-text {
-    font-size: 7.5rem;
-  }
-}
-
-@media (min-width: 1440px) {
-  .header-text {
-    font-size: 8.567rem;
-  }
-}
-
-@layer components {
-  .link {
-    @apply cursor-pointer decoration-[#A3A3A3] decoration-1 underline-offset-4 hover:underline;
-  }
-
-  .container-padding {
-    @apply p-5;
-  }
-
-  .section-padding {
-    @apply min-h-[58vh] md:min-h-[88vh] md:px-12 lg:px-32 xl:px-52;
-  }
-
-  .section-text {
-    @apply text-5xl font-medium text-[#A3A3A3] md:text-8xl;
-  }
-
-  .title-text {
-    @apply line-height text-xs font-medium tracking-widest md:text-sm;
-  }
-}
-
-a:focus,
-a:visited,
-a:active {
-  outline: none;
-}
-
-input,
-textarea,
-button,
-select,
-body,
-a {
-  /* Disable blue-highlight */
-  -moz-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: transparent;
-  -khtml-tap-highlight-color: transparent;
-  -o-tap-highlight-color: transparent;
-
-  /* Disable dragging elements */
-  user-drag: none;
-  -moz-user-drag: none;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -o-user-drag: none;
-
-  /* Disable highlighting elements */
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-}
-
-.mobile-nav__footer {
-  border-top: 1px solid white;
-}
-
-.mobile-nav__header {
-  border-bottom: 1px solid white;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-body::-webkit-scrollbar {
+html::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  background-color: #000;
-  min-height: 100vh;
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-no-scrollbar::-webkit-scrollbar {
-  display: none;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-.line-height {
-  line-height: 1.8;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-/* @media only screen and (min-width: 600px) {
- 
-} */
-
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font-family: 'General Sans', sans-serif;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
