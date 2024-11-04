@@ -114,14 +114,16 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
       {isVisible && (
         <motion.div
           {...anim(pageSlide)}
-          className='fixed inset-0 flex flex-col items-center justify-center bg-black z-[999] font-berlingske-serif'
+          className='fixed inset-0 flex flex-col items-center justify-center bg-inherit z-[999] font-berlingske-serif'
         >
           <motion.div className='flex flex-col items-center justify-center space-y-8'>
             <Icons.logo
               className={cn('size-32', 'shadow', 'flex rounded-full')}
             />
 
-            <p className='text-white mb-4 text-3xl font-medium'>{progress}%</p>
+            <p className='text-inherit mb-4 text-3xl font-medium'>
+              {progress}%
+            </p>
             <Progress value={progress} className='w-[20rem] h-2' />
           </motion.div>
         </motion.div>

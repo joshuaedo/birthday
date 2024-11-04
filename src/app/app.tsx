@@ -1,33 +1,47 @@
 import { BrowserRouter } from 'react-router-dom';
-import Router from '@/components/layout/router';
-import Providers from '@/providers';
-import Header from '@/components/layout/header';
-import Main from '@/components/layout/main';
-import Footer from '@/components/layout/footer';
-import { PageLoader } from '@/components/layout/loader';
+import { PageLoader } from '@/components/common/loader';
 import { useState } from 'react';
-import Cursor from '@/components/layout/cursor';
 import useDate from '@/hooks/use-date';
+import { CountdownTimer } from '@/components/common/counter';
+import useMediaQuery from '@/hooks/use-media-query';
+import { ScrollerProvider } from '@/providers/scroller';
+import Header from '@/components/layout/header';
+import Cursor from '@/components/layout/cursor';
+import Footer from '@/components/layout/footer';
+import Router from '@/components/layout/router';
 
-export function App() {
+export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { isBirthday } = useDate();
+  const { lg } = useMediaQuery();
 
   return (
     <BrowserRouter>
-      <Providers>
-        <div className='relative font-berlingske-serif select-none font-normal w-full max-w-screen bg-amber-50 text-zinc-700'>
-          {isLoading && !isBirthday && (
-            <PageLoader onLoadingComplete={() => setIsLoading(false)} />
-          )}
-          <Header />
-          <Main>
-            <Router />
-          </Main>
-          <Cursor />
-          <Footer />
-        </div>
-      </Providers>
+      <div className='relative font-berlingske-serif select-none font-normal w-full max-w-screen bg-amber-50 text-zinc-700'>
+        {isBirthday ? (
+          <CountdownTimer />
+        ) : (
+          <>
+            {isLoading && (
+              <PageLoader onLoadingComplete={() => setIsLoading(false)} />
+            )}
+            {lg ? (
+              <ScrollerProvider>
+                <Header />
+                <Router />
+                <Cursor />
+                <Footer />
+              </ScrollerProvider>
+            ) : (
+              <>
+                <Header />
+                <Router />
+                <Footer />
+              </>
+            )}
+          </>
+        )}
+      </div>
     </BrowserRouter>
   );
-}
+};
