@@ -1,17 +1,18 @@
-import { homeGallery } from '@/lib/gallery';
+import { years } from '@/lib/year';
 import { useState } from 'react';
 import Image from './image';
+import { Link } from 'react-router-dom';
 
 const Gallery = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  console.log(homeGallery);
+  console.log(years);
 
   return (
-    <div className='relative w-full h-[65vh] overflow-hidden border border-zinc-700 rounded-[3px]'>
-      {homeGallery.map((photo) => (
+    <div className='relative w-full h-[65vh] overflow-hidden border border-tertiary rounded-[3px]'>
+      {years.map((photo) => (
         <div
           key={photo.id}
-          className={`absolute inset-0 max-w-16 h-fit bg-white border border-zinc-700 transform transition-transform duration-300 ease-out px-1.5 pt-1.5 pb-3 rounded-[1px]`}
+          className={`absolute inset-0 max-w-16 h-fit bg-white border border-tertiary transform transition-transform duration-300 ease-out px-1.5 pt-1.5 pb-3 rounded-[1px] cursor-pointer`}
           style={{
             ...photo.style,
             zIndex: hoveredId === photo.id ? 99 : photo.style.zIndex,
@@ -19,13 +20,15 @@ const Gallery = () => {
           onMouseEnter={() => setHoveredId(photo.id)}
           onMouseLeave={() => setHoveredId(null)}
         >
-          <Image
-            height={999}
-            width={999}
-            src={photo.src}
-            alt={photo.alt}
-            className='h-full object-contain'
-          />
+          <Link to={`/year/${photo.id}`}>
+            <Image
+              height={999}
+              width={999}
+              src={photo.src}
+              alt={photo.alt}
+              className='h-full object-contain'
+            />
+          </Link>
         </div>
       ))}
     </div>

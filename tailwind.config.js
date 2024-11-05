@@ -18,6 +18,9 @@ module.exports = {
         'berlingske-serif': ['BerlingskeSerif', 'sans-serif'],
       },
       colors: {
+        primary: '#F5E8C7',
+        secondary: '#DEBA9D',
+        tertiary: '#3f3f46',
         success: '#45BA45',
         pending: '#7FE8FF',
         error: '#FF5B5B',
@@ -30,14 +33,6 @@ module.exports = {
         popover: {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))',
-        },
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { splitTitle, truncateString } from '@/lib/utils';
 import Image from './image';
 import { useNavigate } from 'react-router-dom';
-import { GalleryItem } from '@/lib/gallery';
+import { type Year } from '@/lib/year';
 
 const anim = {
   initial: { width: 0 },
@@ -17,7 +17,7 @@ const anim = {
 };
 
 interface YearProps {
-  year: GalleryItem;
+  year: Year;
 }
 
 const Year: React.FC<YearProps> = ({ year }) => {

@@ -7,6 +7,7 @@ import {
 import { creator, images } from '@/config/site';
 import useTextReveal from '@/hooks/use-text-reveal';
 import useMediaQuery from '@/hooks/use-media-query';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   useTextReveal();
@@ -16,7 +17,7 @@ const Header = () => {
     <nav className='absolute z-[4] flex h-[11vh] w-screen items-center justify-between bg-opacity-50 p-7 text-lg text-reveal'>
       <div className='flex'>
         <div className='mr-[12vh] flex items-center font-medium md:mr-[14vh]'>
-          <a href='/'>{creator.name}</a>
+          <Link to='/'>{creator.name}</Link>
         </div>
       </div>
       <div className='flex ml-auto space-x-10'>

@@ -23,7 +23,7 @@ const Footer = () => {
       <div
         className={cn(
           lg
-            ? 'fixed bottom-0 inset-x-0 h-[100vh] p-7 xl:p-8 divide-y divide-gray-700'
+            ? 'fixed bottom-0 inset-x-0 h-[100vh] p-7 xl:p-8 divide-y divide-tertiary'
             : ''
         )}
       >

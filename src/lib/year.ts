@@ -1,4 +1,4 @@
-const homeGallery = [
+const years = [
   {
     src: '/images/home/1.webp',
     alt: 'one',
@@ -243,6 +243,7 @@ const homeGallery = [
     src: '/images/home/21.webp',
     alt: 'twenty-one',
     id: 21,
+    hasReview: true,
     style: {
       transform:
         'translate(6.302542072007209%, 17.09951742944989%) rotate(-16.532009664620844deg)',
@@ -253,6 +254,6 @@ const homeGallery = [
   },
 ];
 
-export type GalleryItem = (typeof homeGallery)[number];
+export type Year = (typeof years)[number];
 
-export { homeGallery };
+export { years };

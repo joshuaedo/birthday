@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Progress } from '@/components/common/progress';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icons } from '@/components/common/icons';
 import { cn } from '@/lib/utils';
@@ -114,7 +113,7 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
       {isVisible && (
         <motion.div
           {...anim(pageSlide)}
-          className='fixed inset-0 flex flex-col items-center justify-center bg-inherit z-[999] font-berlingske-serif'
+          className='fixed inset-0 flex flex-col items-center justify-center z-[999] font-berlingske-serif bg-secondary' //bg-black text-white'
         >
           <motion.div className='flex flex-col items-center justify-center space-y-8'>
             <Icons.logo
@@ -124,7 +123,6 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
             <p className='text-inherit mb-4 text-3xl font-medium'>
               {progress}%
             </p>
-            <Progress value={progress} className='w-[20rem] h-2' />
           </motion.div>
         </motion.div>
       )}
