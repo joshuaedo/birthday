@@ -1,7 +1,7 @@
 import { years } from '@/lib/year';
 import { useState } from 'react';
 import Image from './image';
-import { Link } from 'react-router-dom';
+import { Link } from '@/components/common/link';
 
 const Gallery = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);

@@ -17,7 +17,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='relative font-berlingske-serif select-none font-normal w-full max-w-screen bg-primary text-tertiary'>
+      <div className='relative font-cormorant-garamond select-none font-normal w-full max-w-screen bg-primary text-tertiary'>
         {isBirthday ? (
           <CountdownTimer />
         ) : (

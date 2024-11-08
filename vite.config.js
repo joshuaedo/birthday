@@ -16,20 +16,7 @@ export default defineConfig({
             display: 'auto',
             preload: true,
           },
-          {
-            name: 'Geist',
-            local: 'Geist',
-            src: './src/assets/fonts/geist/*.woff2',
-            display: 'auto',
-            preload: true,
-          },
-          {
-            name: 'BerlingskeSerif',
-            local: 'BerlingskeSerif',
-            src: './src/assets/fonts/berlingske-serif/*.woff2',
-            display: 'auto',
-            preload: true,
-          },
+         
         ],
       },
     }),

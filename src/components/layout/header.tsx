@@ -7,7 +7,7 @@ import {
 import { creator, images } from '@/config/site';
 import useTextReveal from '@/hooks/use-text-reveal';
 import useMediaQuery from '@/hooks/use-media-query';
-import { Link } from 'react-router-dom';
+import { Link } from '@/components/common/link';
 
 const Header = () => {
   useTextReveal();

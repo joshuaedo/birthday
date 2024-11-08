@@ -14,8 +14,6 @@ module.exports = {
     extend: {
       fontFamily: {
         'san-francisco': ['SF-Pro-Text', 'sans-serif'],
-        geist: ['Geist', 'sans-serif'],
-        'berlingske-serif': ['BerlingskeSerif', 'sans-serif'],
       },
       colors: {
         primary: '#F5E8C7',

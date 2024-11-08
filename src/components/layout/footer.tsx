@@ -1,7 +1,7 @@
 import { creator } from '@/config/site';
 import useDate from '@/hooks/use-date';
 import { Icons } from '@/components/common/icons';
-import { Link } from 'react-router-dom';
+import { Link } from '@/components/common/link';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../common/button';
 import useMediaQuery from '@/hooks/use-media-query';
