@@ -1,47 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { anim, pageSlide } from '@/lib/anim';
+import { anim, pageSlide, transition } from '@/lib/anim';
 import Video from './video';
-import { AnimatedNumber } from './animated-number';
+import { TextEffect } from './text';
+import Image from './image';
+import { useLocation } from 'react-router-dom';
+import { formatAltText, getYearFromUrl } from '@/lib/utils';
 
 interface PageLoaderProps {
   onLoadingComplete?: () => void;
 }
 
-export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
+const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [showVideo, setShowVideo] = useState(false);
-  const [numbers, setNumbers] = useState<number[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    setValue(21);
-  }, []);
-
-  // Initialize numbers array
-  useEffect(() => {
-    const nums = Array.from({ length: 21 }, (_, i) => i + 1);
-    setNumbers(nums);
-  }, []);
-
-  // Handle number animation sequence
-  useEffect(() => {
-    if (currentIndex < numbers.length) {
-      const timer = setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
-      }, 200); // Controls speed of number changes
-
-      return () => clearTimeout(timer);
-    } else if (currentIndex === numbers.length) {
-      // When number animation completes, show video after delay
-      const timer = setTimeout(() => {
-        setShowVideo(true);
-      }, 500);
-
-      return () => clearTimeout(timer);
-    }
-  }, [currentIndex, numbers.length]);
+  const handleVideoStart = () => {
+    setTimeout(() => {
+      setShowVideo(true);
+    }, 3000);
+  };
 
   const handleVideoEnd = () => {
     setTimeout(() => {
@@ -55,22 +33,22 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
     },
     animate: {
       clipPath: 'inset(0 0 0 0)',
-      transition: {
-        duration: 1.5,
-        ease: [0.16, 0.1, 0.17, 0.98],
-        delay: 0.2,
-      },
+      transition,
     },
   };
+
+  useEffect(() => {
+    handleVideoStart();
+  }, []);
 
   return (
     <AnimatePresence mode='wait' onExitComplete={() => onLoadingComplete?.()}>
       {isVisible && (
         <motion.div
           {...anim(pageSlide)}
-          className='fixed inset-0 flex flex-col items-center justify-center z-[999] font-cormorant-garamond bg-secondary'
+          className='fixed inset-0 flex-col-center z-[999] font-cormorant-garamond bg-secondary w-full'
         >
-          <motion.div className='flex flex-col items-center justify-center space-y-8'>
+          <motion.div className='flex flex-col-center relative w-full'>
             <motion.div
               className='w-[200px] h-[346px] relative'
               variants={videoContainerVariants}
@@ -88,17 +66,89 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
             </motion.div>
 
             {!showVideo && (
-              <div className='relative h-32 w-32 overflow-hidden bg-secondary'>
-                <div className='flex w-full items-center justify-center'>
-                  <AnimatedNumber
-                    className='inline-flex items-center font-mono text-2xl font-light text-zinc-800 dark:text-zinc-50'
-                    springOptions={{
-                      bounce: 0,
-                      duration: 3000,
-                    }}
-                    value={value}
-                  />
-                </div>
+              <div className='absolute-center w-full text-center'>
+                <TextEffect
+                  per='char'
+                  preset='fade'
+                  className='w-full text-center'
+                >
+                  Setting stuff up
+                </TextEffect>
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [showImage, setShowImage] = useState(false);
+
+  // Get the current URL path
+  const location = useLocation();
+  const year = getYearFromUrl(location.pathname); // Obtain the image source dynamically
+
+  const handleImageStart = () => {
+    setTimeout(() => {
+      setShowImage(true);
+    }, 3000);
+  };
+
+  const handleImageEnd = () => {
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 6000);
+  };
+
+  const videoContainerVariants = {
+    initial: {
+      clipPath: 'inset(100% 0 0 0)',
+    },
+    animate: {
+      clipPath: 'inset(0 0 0 0)',
+      transition,
+    },
+  };
+
+  useEffect(() => {
+    handleImageStart();
+    handleImageEnd();
+  }, []);
+
+  return (
+    <AnimatePresence mode='wait' onExitComplete={() => onLoadingComplete?.()}>
+      {isVisible && (
+        <motion.div
+          {...anim(pageSlide)}
+          className='fixed inset-0 flex-col-center z-[999] font-cormorant-garamond bg-secondary w-full'
+        >
+          <motion.div className='flex flex-col-center relative w-full'>
+            <motion.div
+              className='w-[200px] h-[346px] relative'
+              variants={videoContainerVariants}
+              initial='initial'
+              animate={showImage ? 'animate' : 'initial'}
+            >
+              {showImage && year && (
+                <Image
+                  src={year?.src}
+                  alt={formatAltText(year?.alt)}
+                  className='absolute z-10 inset-0 object-contain h-full'
+                />
+              )}
+            </motion.div>
+
+            {!showImage && year && (
+              <div className='absolute-center w-full text-center'>
+                <TextEffect
+                  per='char'
+                  preset='fade'
+                  className='w-full text-center'
+                >
+                  {formatAltText(year?.alt) ?? ''}
+                </TextEffect>
               </div>
             )}
           </motion.div>
@@ -108,4 +158,4 @@ export const PageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   );
 };
 
-export default PageLoader;
+export { HomePageLoader, YearPageLoader };

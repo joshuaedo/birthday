@@ -29,7 +29,7 @@ const Year: React.FC<YearProps> = ({ year }) => {
   return (
     <div
       key={year.id}
-      onDoubleClick={() => navigate(`/year/${year.id}`)}
+      onDoubleClick={() => navigate(`/year/${year.alt}`)}
       className='flex justify-center'
     >
       <div
@@ -49,7 +49,7 @@ const Year: React.FC<YearProps> = ({ year }) => {
             alt={year.alt}
             height={1000}
             width={1000}
-            onClick={() => navigate(`/year/${year.id}`)}
+            onClick={() => navigate(`/year/${year.alt}`)}
             className='w-[2.5rem] mx-2'
           />
         </motion.div>

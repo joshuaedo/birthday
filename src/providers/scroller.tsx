@@ -7,23 +7,7 @@ const ScrollerProvider = ({ children }: { children: React.ReactNode }) => {
   const { lg } = useMediaQuery();
 
   useEffect(() => {
-    const anchorLinks = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>('a[href*="/#"]')
-    );
-
     if (!lg) {
-      // Handling smooth scrolling without Lenis for smaller screens
-      anchorLinks.forEach((anchor) => {
-        anchor.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetId = anchor.href.split('/#').pop();
-          const targetElement = document.getElementById(targetId!);
-
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
       return;
     } else {
       // Initialize Lenis for smooth scrolling on larger screens
@@ -39,15 +23,6 @@ const ScrollerProvider = ({ children }: { children: React.ReactNode }) => {
       };
       requestAnimationFrame(raf);
 
-      anchorLinks.forEach((anchor) => {
-        anchor.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetId = anchor.href.split('/#').pop();
-          if (targetId) {
-            lenis.scrollTo(`#${targetId}`);
-          }
-        });
-      });
       return () => {
         lenis.stop();
       };

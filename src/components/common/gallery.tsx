@@ -5,7 +5,6 @@ import { Link } from '@/components/common/link';
 
 const Gallery = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
-  console.log(years);
 
   return (
     <div className='relative w-full h-[65vh] overflow-hidden border border-tertiary rounded-[3px]'>
@@ -20,7 +19,7 @@ const Gallery = () => {
           onMouseEnter={() => setHoveredId(photo.id)}
           onMouseLeave={() => setHoveredId(null)}
         >
-          <Link to={`/year/${photo.id}`}>
+          <Link to={`/year/${photo.alt}`}>
             <Image
               height={999}
               width={999}

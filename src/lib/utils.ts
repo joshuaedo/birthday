@@ -1,6 +1,7 @@
 import { WordData } from '@/types/word';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { years } from './year';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
@@ -104,4 +105,22 @@ const optimizeCloudinaryImage = (url: string): string => {
   return optimizedUrl;
 };
 
-export { optimizeCloudinaryAudio, optimizeCloudinaryImage };
+const getYearFromUrl = (url: string) => {
+  // Extract the `alt` value from the URL path
+  const alt = url.split('/').pop();
+
+  // Find the object in `year` with a matching `alt` value
+  const year = years.find((item) => item.alt === alt);
+
+  // Return the `src` if found, otherwise return undefined
+  return year;
+};
+
+const formatAltText = (alt: string) => {
+  return alt
+    .split('-') // Split by hyphen
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+    .join(' '); // Join words with a space
+};
+
+export { optimizeCloudinaryAudio, optimizeCloudinaryImage, getYearFromUrl, formatAltText };
