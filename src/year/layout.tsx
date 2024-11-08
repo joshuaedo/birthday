@@ -1,4 +1,5 @@
 import { YearPageLoader } from '@/components/common/loader';
+import { ScrollProgress } from '@/components/common/scroll-progress';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ export const YearPageLayout = ({}: YearPageLayoutProps) => {
       {isLoading && (
         <YearPageLoader onLoadingComplete={() => setIsLoading(false)} />
       )}
+      <ScrollProgress color='#3f3f46' />
       <Outlet />
     </>
   );
