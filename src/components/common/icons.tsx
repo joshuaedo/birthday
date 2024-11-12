@@ -30,7 +30,7 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  longArrowBlack: (props: LucideProps) => (
+  longArrowDark: (props: LucideProps) => (
     <svg
       viewBox='0 0 17 83'
       fill='none'
@@ -39,7 +39,7 @@ export const Icons = {
     >
       <path
         d='M8.5 1V82M8.5 82C14.5 75.5 12.5 77.5 16.5 73M8.5 82C3.5 76.5 5.5 78.5 0.5 73'
-        stroke='#000'
+        stroke='#3f3f46'
         strokeLinecap='round'
         strokeLinejoin='round'
       ></path>

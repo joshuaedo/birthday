@@ -5,7 +5,7 @@ import Router from '@/components/layout/router';
 import Footer from '@/components/layout/footer';
 import { ScrollerProvider } from '@/providers/scroller';
 import Header from '@/components/layout/header';
-import Cursor from '@/components/layout/cursor';
+// import Cursor from '@/components/layout/cursor';
 
 export const App = () => {
   const { isBirthday } = useDate();
@@ -19,7 +19,7 @@ export const App = () => {
           <ScrollerProvider>
             <Header />
             <Router />
-            <Cursor />
+            {/* <Cursor /> */}
             <Footer />
           </ScrollerProvider>
         )}
