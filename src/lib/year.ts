@@ -1,6 +1,6 @@
 const years = [
   {
-    src: '/images/home/1.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524818/birthday.joshuaedo.com/home/1_sej4bn.webp',
     alt: 'one',
     id: 1,
     style: {
@@ -12,7 +12,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/2.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524802/birthday.joshuaedo.com/home/2_h9rqk1.webp',
     alt: 'two',
     id: 2,
     style: {
@@ -24,7 +24,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/3.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524770/birthday.joshuaedo.com/home/3_amh8g2.webp',
     alt: 'three',
     id: 3,
     style: {
@@ -36,7 +36,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/4.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524815/birthday.joshuaedo.com/home/4_eunw38.webp',
     alt: 'four',
     id: 4,
     style: {
@@ -48,7 +48,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/5.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524811/birthday.joshuaedo.com/home/5_miqtye.webp',
     alt: 'five',
     id: 5,
     style: {
@@ -60,7 +60,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/6.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524792/birthday.joshuaedo.com/home/6_chqzwm.webp',
     alt: 'six',
     id: 6,
     style: {
@@ -72,7 +72,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/7.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524843/birthday.joshuaedo.com/home/7_qkcbtw.webp',
     alt: 'seven',
     id: 7,
     style: {
@@ -84,7 +84,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/8.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524812/birthday.joshuaedo.com/home/8_agrk2l.webp',
     alt: 'eight',
     id: 8,
     style: {
@@ -96,7 +96,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/9.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524819/birthday.joshuaedo.com/home/9_nbwmmm.webp',
     alt: 'nine',
     id: 9,
     style: {
@@ -108,7 +108,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/10.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524817/birthday.joshuaedo.com/home/10_aw1f6e.webp',
     alt: 'ten',
     id: 10,
     style: {
@@ -120,7 +120,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/11.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524832/birthday.joshuaedo.com/home/11_p5qia5.webp',
     alt: 'eleven',
     id: 11,
     style: {
@@ -132,7 +132,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/12.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524819/birthday.joshuaedo.com/home/12_yzqokn.webp',
     alt: 'twelve',
     id: 12,
     style: {
@@ -144,7 +144,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/13.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524832/birthday.joshuaedo.com/home/13_f7kpa1.webp',
     alt: 'thirteen',
     id: 13,
     style: {
@@ -156,7 +156,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/14.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524833/birthday.joshuaedo.com/home/14_duhd7k.webp',
     alt: 'fourteen',
     id: 14,
     style: {
@@ -168,7 +168,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/15.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524826/birthday.joshuaedo.com/home/15_djbu9a.webp',
     alt: 'fifteen',
     id: 15,
     style: {
@@ -180,7 +180,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/16.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524826/birthday.joshuaedo.com/home/16_p0nkip.webp',
     alt: 'sixteen',
     id: 16,
     style: {
@@ -192,7 +192,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/17.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524837/birthday.joshuaedo.com/home/17_stsnts.webp',
     alt: 'seventeen',
     id: 17,
     style: {
@@ -204,7 +204,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/18.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524842/birthday.joshuaedo.com/home/18_iklivo.webp',
     alt: 'eighteen',
     id: 18,
     style: {
@@ -216,7 +216,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/19.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524838/birthday.joshuaedo.com/home/19_p7rsgn.webp',
     alt: 'nineteen',
     id: 19,
     style: {
@@ -228,7 +228,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/20.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524836/birthday.joshuaedo.com/home/20_thlrxi.webp',
     alt: 'twenty',
     id: 20,
     style: {
@@ -240,7 +240,7 @@ const years = [
     },
   },
   {
-    src: '/images/home/21.webp',
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1731524837/birthday.joshuaedo.com/home/21_i4i7ik.webp',
     alt: 'twenty-one',
     id: 21,
     hasReview: true,

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { splitTitle, truncateString } from '@/lib/utils';
+import {
+  optimizeCloudinaryImage,
+  splitTitle,
+  truncateString,
+} from '@/lib/utils';
 import Image from './image';
 import { useNavigate } from 'react-router-dom';
 import { type Year } from '@/lib/year';
@@ -25,11 +29,16 @@ const Year: React.FC<YearProps> = ({ year }) => {
   const title = year.alt;
   const { title1, title2 } = splitTitle(truncateString(title, 25));
   const navigate = useNavigate();
+  const optimizedImageSrc = optimizeCloudinaryImage(year.src);
+
+  const goToYearPage = () => {
+    year.hasReview ? navigate(`/year/${title}`) : {};
+  };
 
   return (
     <div
       key={year.id}
-      onDoubleClick={() => navigate(`/year/${year.alt}`)}
+      onDoubleClick={goToYearPage}
       className='flex justify-center'
     >
       <div
@@ -45,11 +54,11 @@ const Year: React.FC<YearProps> = ({ year }) => {
           className='flex justify-center overflow-hidden w-0'
         >
           <Image
-            src={year.src}
+            src={optimizedImageSrc}
             alt={year.alt}
             height={1000}
             width={1000}
-            onClick={() => navigate(`/year/${year.alt}`)}
+            onClick={goToYearPage}
             className='w-[2.5rem] mx-2'
           />
         </motion.div>

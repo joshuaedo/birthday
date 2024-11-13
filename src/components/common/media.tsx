@@ -1,8 +1,12 @@
 import Image from '@/components/common/image';
-import { cn } from '@/lib/utils';
-import { ImageIcon } from 'lucide-react';
+import {
+  cn,
+  optimizeCloudinaryImage,
+  optimizeCloudinaryVideo,
+} from '@/lib/utils';
 import { useEffect, useState, useCallback } from 'react';
 import Video from './video';
+import useSound from '@/hooks/use-sound';
 
 interface MediaProps {
   src: string;
@@ -14,8 +18,9 @@ const Media = ({ src, className, alt }: MediaProps) => {
   const [mediaType, setMediaType] = useState<'image' | 'video' | 'unknown'>(
     'unknown'
   );
-
-  const [hasError, setHasError] = useState(false);
+  const { isSoundEnabled } = useSound();
+  const optimizedVideoSrc = optimizeCloudinaryVideo(src);
+  const optimizedImageSrc = optimizeCloudinaryImage(src);
 
   const getMediaType = useCallback(
     (url: string): 'image' | 'video' | 'unknown' => {
@@ -40,32 +45,19 @@ const Media = ({ src, className, alt }: MediaProps) => {
     }
   }, [src, mediaType, getMediaType]);
 
-  const handleMediaError = () => {
-    setHasError(true);
-  };
-
-  const Error = () => (
-    <div className={cn(`relative`, className)}>
-      <div className='flex items-center justify-center w-full h-full'>
-        <ImageIcon />
-      </div>
-    </div>
-  );
-
-  if (hasError || !src) {
-    return <Error />;
-  }
-
   return (
     <div className={cn(`relative`, className)}>
       {mediaType === 'video' ? (
-        <Video src={src} onError={handleMediaError} />
+        <Video
+          src={optimizedVideoSrc}
+          muted={!isSoundEnabled}
+          className='rounded-[4px]'
+        />
       ) : (
         <Image
-          src={src}
+          src={optimizedImageSrc}
           alt={alt}
-          onError={handleMediaError}
-          className={cn('w-full h-full object-cover object-top')}
+          className={cn('w-full h-full object-cover object-top rounded-[4px]')}
         />
       )}
     </div>

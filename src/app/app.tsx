@@ -3,8 +3,9 @@ import useDate from '@/hooks/use-date';
 import { CountdownTimer } from '@/components/common/counter';
 import Router from '@/components/layout/router';
 import Footer from '@/components/layout/footer';
-import { ScrollerProvider } from '@/providers/scroller';
 import Header from '@/components/layout/header';
+import Providers from '@/providers';
+
 // import Cursor from '@/components/layout/cursor';
 
 export const App = () => {
@@ -12,16 +13,17 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='relative font-cormorant-garamond font-normal w-full max-w-screen bg-primary text-tertiary'>
+      <div className='relative font-cormorant-garamond font-normal max-w-screen bg-primary text-tertiary'>
         {isBirthday ? (
           <CountdownTimer />
         ) : (
-          <ScrollerProvider>
+          <Providers>
             <Header />
+
             <Router />
             {/* <Cursor /> */}
             <Footer />
-          </ScrollerProvider>
+          </Providers>
         )}
       </div>
     </BrowserRouter>

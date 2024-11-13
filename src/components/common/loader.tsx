@@ -5,7 +5,11 @@ import Video from './video';
 import { TextEffect } from './text';
 import Image from './image';
 import { useLocation } from 'react-router-dom';
-import { formatAltText, getYearFromUrl } from '@/lib/utils';
+import {
+  formatAltText,
+  getYearFromUrl,
+  optimizeCloudinaryVideo,
+} from '@/lib/utils';
 
 interface PageLoaderProps {
   onLoadingComplete?: () => void;
@@ -14,6 +18,9 @@ interface PageLoaderProps {
 const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [showVideo, setShowVideo] = useState(false);
+  const optimizedVideoUrl = optimizeCloudinaryVideo(
+    'https://res.cloudinary.com/dnw9fplsw/video/upload/v1731525007/birthday.joshuaedo.com/home/loader_tvkj9t.mp4'
+  );
 
   const handleVideoStart = () => {
     setTimeout(() => {
@@ -58,7 +65,7 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
               {showVideo && (
                 <Video
                   loop={false}
-                  src='/videos/home/loader.mp4'
+                  src={optimizedVideoUrl}
                   className='absolute z-10 inset-0'
                   onEnded={handleVideoEnd}
                 />

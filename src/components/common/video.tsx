@@ -6,16 +6,16 @@ export interface VideoProps extends VideoHTMLAttributes<HTMLVideoElement> {
 }
 
 const Video = forwardRef<HTMLVideoElement, VideoProps>(
-  ({ className, src, loop = true, ...props }, ref) => {
+  ({ className, src, loop = true, muted = true, ...props }, ref) => {
     return (
       <video
-        ref={ref} 
+        ref={ref}
         data-nosnippet
         playsInline
         disablePictureInPicture
         preload='metadata'
         loop={loop}
-        muted
+        muted={muted}
         autoPlay
         className={`${className} object-cover w-full h-full`}
         {...props}

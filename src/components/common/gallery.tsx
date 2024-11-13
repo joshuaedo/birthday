@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from './image';
 import { Button } from './button';
-import { cn, formatAltText } from '@/lib/utils';
+import { cn, formatAltText, optimizeCloudinaryImage } from '@/lib/utils';
 import { X } from 'lucide-react';
 
 const Gallery = () => {
@@ -11,6 +11,9 @@ const Gallery = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<
     (typeof years)[number] | null
   >(null);
+  const optimizedSelectedPhotoSrc = optimizeCloudinaryImage(
+    selectedPhoto?.src || ''
+  );
 
   const handleImageClick = (photo: (typeof years)[number]) => {
     setSelectedPhoto(photo);
@@ -26,28 +29,31 @@ const Gallery = () => {
 
   return (
     <div className='relative w-full h-[65vh] overflow-hidden border border-tertiary rounded-[3px]'>
-      {years.map((photo) => (
-        <motion.div
-          key={photo.id}
-          layoutId={`photo-${photo.id}`}
-          className={`absolute inset-0 max-w-16 h-fit bg-white border border-tertiary transform transition-transform duration-300 ease-out px-1.5 pt-1.5 pb-3 rounded-[1px] cursor-pointer`}
-          style={{
-            ...photo.style,
-            zIndex: hoveredId === photo.id ? 99 : photo.style.zIndex,
-          }}
-          onMouseEnter={() => setHoveredId(photo.id)}
-          onMouseLeave={() => setHoveredId(null)}
-          onClick={() => handleImageClick(photo)}
-        >
-          <Image
-            height={999}
-            width={999}
-            src={photo.src}
-            alt={photo.alt}
-            className='h-full object-contain'
-          />
-        </motion.div>
-      ))}
+      {years.map((photo) => {
+        const optimizedImageSrc = optimizeCloudinaryImage(photo.src);
+        return (
+          <motion.div
+            key={photo.id}
+            layoutId={`photo-${photo.id}`}
+            className={`absolute inset-0 max-w-16 h-fit bg-white border border-tertiary transform transition-transform duration-300 ease-out px-1.5 pt-1.5 pb-3 rounded-[1px] cursor-pointer`}
+            style={{
+              ...photo.style,
+              zIndex: hoveredId === photo.id ? 120 : photo.style.zIndex,
+            }}
+            onMouseEnter={() => setHoveredId(photo.id)}
+            onMouseLeave={() => setHoveredId(null)}
+            onClick={() => handleImageClick(photo)}
+          >
+            <Image
+              height={999}
+              width={999}
+              src={optimizedImageSrc}
+              alt={photo.alt}
+              className='h-full object-contain'
+            />
+          </motion.div>
+        );
+      })}
 
       <AnimatePresence>
         {selectedPhoto && (
@@ -77,7 +83,7 @@ const Gallery = () => {
                   <Image
                     height={999}
                     width={999}
-                    src={selectedPhoto.src}
+                    src={optimizedSelectedPhotoSrc}
                     alt={selectedPhoto.alt}
                     className='object-contain size-full max-h-[calc(80vh-3rem)] overflow-hidden'
                   />
