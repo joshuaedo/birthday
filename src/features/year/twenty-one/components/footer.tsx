@@ -11,7 +11,7 @@ export const Footer = ({}: FooterProps) => {
   };
 
   return (
-    <div className='lg:grid grid-cols-2 w-full space-y-6 lg:space-y-0 lg:gap-12'>
+    <footer className='lg:grid grid-cols-2 w-full space-y-6 lg:space-y-0 lg:gap-12'>
       <Link
         to='/'
         className={cn(
@@ -34,6 +34,6 @@ export const Footer = ({}: FooterProps) => {
         <Icons.longArrowDark className='size-12 lg:size-40 rotate-180' />
         Go back to top
       </Button>
-    </div>
+    </footer>
   );
 };

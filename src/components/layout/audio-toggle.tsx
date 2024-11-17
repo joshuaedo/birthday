@@ -31,11 +31,11 @@ const AudioTogglePopover = () => {
     <AnimatePresence mode='wait'>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: '800px' }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: '800px' }}
+          initial={{ y: '800px' }}
+          animate={{ y: 0 }}
+          exit={{ y: '800px' }}
           transition={transition}
-          className='hidden lg:block fixed z-[99] bottom-10 right-10 w-72 p-4 bg-white rounded-[4px] border border-tertiary'
+          className='fixed z-[99] bottom-10 right-10 w-72 p-4 bg-white rounded-[4px] border border-tertiary'
         >
           <div className='flex justify-between items-center'>
             <p className='font-semibold'>Sound Settings</p>

@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { ScrollerProvider } from './scroller';
 import { SoundProvider } from './sound';
+import { QueryProvider } from './query';
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <SoundProvider>
-      <ScrollerProvider>{children}</ScrollerProvider>
-    </SoundProvider>
+    <QueryProvider>
+      <SoundProvider>
+        <ScrollerProvider>{children}</ScrollerProvider>
+      </SoundProvider>
+    </QueryProvider>
   );
 };
 

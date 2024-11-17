@@ -1,31 +1,35 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { anim, pageSlide, transition } from '@/lib/anim';
-import Video from './video';
-import { TextEffect } from './text';
-import { optimizeCloudinaryVideo } from '@/lib/utils';
+import { useLocation } from 'react-router-dom';
+import {
+  formatAltText,
+  getYearFromUrl,
+} from '@/lib/utils';
+import Image from '@/components/common/image';
+import { TextEffect } from '@/components/common/text';
 
 interface PageLoaderProps {
   onLoadingComplete?: () => void;
 }
 
-const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
+const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [showVideo, setShowVideo] = useState(false);
-  const optimizedVideoUrl = optimizeCloudinaryVideo(
-    'https://res.cloudinary.com/dnw9fplsw/video/upload/v1731525007/birthday.joshuaedo.com/home/loader_tvkj9t.mp4'
-  );
+  const [showImage, setShowImage] = useState(false);
 
-  const handleVideoStart = () => {
+  const location = useLocation();
+  const year = getYearFromUrl(location.pathname); 
+
+  const handleImageStart = () => {
     setTimeout(() => {
-      setShowVideo(true);
+      setShowImage(true);
     }, 3000);
   };
 
-  const handleVideoEnd = () => {
+  const handleImageEnd = () => {
     setTimeout(() => {
       setIsVisible(false);
-    }, 500);
+    }, 6000);
   };
 
   const videoContainerVariants = {
@@ -39,7 +43,8 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   };
 
   useEffect(() => {
-    handleVideoStart();
+    handleImageStart();
+    handleImageEnd();
   }, []);
 
   return (
@@ -54,26 +59,25 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
               className='w-[200px] h-[346px] relative'
               variants={videoContainerVariants}
               initial='initial'
-              animate={showVideo ? 'animate' : 'initial'}
+              animate={showImage ? 'animate' : 'initial'}
             >
-              {showVideo && (
-                <Video
-                  loop={false}
-                  src={optimizedVideoUrl}
-                  className='absolute z-10 inset-0'
-                  onEnded={handleVideoEnd}
+              {showImage && year && (
+                <Image
+                  src={year?.src}
+                  alt={formatAltText(year?.alt)}
+                  className='absolute z-10 inset-0 object-contain h-full'
                 />
               )}
             </motion.div>
 
-            {!showVideo && (
+            {!showImage && year && (
               <div className='absolute-center w-full text-center'>
                 <TextEffect
                   per='char'
                   preset='fade'
                   className='w-full text-center'
                 >
-                  Setting stuff up
+                  {formatAltText(year?.alt) ?? ''}
                 </TextEffect>
               </div>
             )}
@@ -84,4 +88,4 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   );
 };
 
-export { HomePageLoader };
+export { YearPageLoader };

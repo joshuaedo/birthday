@@ -1,7 +1,7 @@
-import { YearPageLoader } from '@/components/common/loader';
 import { ScrollProgress } from '@/components/common/scroll-progress';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { YearPageLoader } from './loader';
 
 interface YearPageLayoutProps {}
 

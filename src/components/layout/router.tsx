@@ -1,8 +1,8 @@
 import NotFoundPage from '@/pages/404';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from '@/pages/home';
-import Page21 from '@/year/twenty-one/components/page';
-import { YearPageLayout } from '@/year/layout';
+import Page21 from '@/features/year/twenty-one/components/page';
+import { YearPageLayout } from '@/features/year/index/components/layout';
 
 const Router = () => {
   const location = useLocation();

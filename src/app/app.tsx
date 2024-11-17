@@ -19,7 +19,6 @@ export const App = () => {
         ) : (
           <Providers>
             <Header />
-
             <Router />
             {/* <Cursor /> */}
             <Footer />
