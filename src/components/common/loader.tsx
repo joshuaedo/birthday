@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { anim, pageSlide, transition } from '@/lib/anim';
 import Video from './video';
-import { TextEffect } from './text';
+import { AnimatedText } from './animated-text';
 import { optimizeCloudinaryVideo } from '@/lib/utils';
 
 interface PageLoaderProps {
@@ -68,13 +68,13 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
 
             {!showVideo && (
               <div className='absolute-center w-full text-center'>
-                <TextEffect
+                <AnimatedText
                   per='char'
                   preset='fade'
                   className='w-full text-center'
                 >
                   Setting stuff up
-                </TextEffect>
+                </AnimatedText>
               </div>
             )}
           </motion.div>

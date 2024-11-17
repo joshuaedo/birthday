@@ -2,12 +2,9 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { anim, pageSlide, transition } from '@/lib/anim';
 import { useLocation } from 'react-router-dom';
-import {
-  formatAltText,
-  getYearFromUrl,
-} from '@/lib/utils';
+import { formatAltText, getYearFromUrl } from '@/lib/utils';
 import Image from '@/components/common/image';
-import { TextEffect } from '@/components/common/text';
+import { AnimatedText } from '@/components/common/animated-text';
 
 interface PageLoaderProps {
   onLoadingComplete?: () => void;
@@ -18,7 +15,7 @@ const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   const [showImage, setShowImage] = useState(false);
 
   const location = useLocation();
-  const year = getYearFromUrl(location.pathname); 
+  const year = getYearFromUrl(location.pathname);
 
   const handleImageStart = () => {
     setTimeout(() => {
@@ -72,13 +69,13 @@ const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
 
             {!showImage && year && (
               <div className='absolute-center w-full text-center'>
-                <TextEffect
+                <AnimatedText
                   per='char'
                   preset='fade'
                   className='w-full text-center'
                 >
                   {formatAltText(year?.alt) ?? ''}
-                </TextEffect>
+                </AnimatedText>
               </div>
             )}
           </motion.div>

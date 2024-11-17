@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { getReviews } from '../lib/requests';
+import { SingleReviewType } from '../types/validators';
 
 const useYearlyReview = (yearSlug?: string) => {
   const [isContentFetched, setIsContentFetched] = useState(false);
@@ -26,7 +27,7 @@ const useYearlyReview = (yearSlug?: string) => {
   }, [isFetchingContent, isContentLoaded, documentContent]);
 
   return {
-    documentContent,
+    documentContent: documentContent as SingleReviewType,
     isContentFetched,
     isFetchingContent,
   };
