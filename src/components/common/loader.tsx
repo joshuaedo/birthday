@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { anim, pageSlide, transition } from '@/lib/anim';
 import Video from './video';
 import { AnimatedText } from './animated-text';
 import { optimizeCloudinaryVideo } from '@/lib/utils';
+import { WavyEllipsis } from './wavy-ellipsis';
+import usePageLoader from '@/hooks/use-page-loader';
 
 interface PageLoaderProps {
   onLoadingComplete?: () => void;
 }
 
 const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
-  const [isVisible, setIsVisible] = useState(true);
   const [showVideo, setShowVideo] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { isVisible } = usePageLoader();
+
   const optimizedVideoUrl = optimizeCloudinaryVideo(
     'https://res.cloudinary.com/dnw9fplsw/video/upload/v1731525007/birthday.joshuaedo.com/home/loader_tvkj9t.mp4'
   );
-
-  const handleVideoStart = () => {
-    setTimeout(() => {
-      setShowVideo(true);
-    }, 3000);
-  };
-
-  const handleVideoEnd = () => {
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 500);
-  };
 
   const videoContainerVariants = {
     initial: {
@@ -39,8 +32,23 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   };
 
   useEffect(() => {
-    handleVideoStart();
-  }, []);
+    // Preload the video
+    const video = new Audio(optimizedVideoUrl);
+    const handleCanPlayThrough = () => {
+      // Clear the timeout since video is ready
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      setShowVideo(true);
+    };
+
+    video.addEventListener('canplaythrough', handleCanPlayThrough);
+
+    // Cleanup
+    return () => {
+      video.removeEventListener('canplaythrough', handleCanPlayThrough);
+    };
+  }, [optimizedVideoUrl]);
 
   return (
     <AnimatePresence mode='wait' onExitComplete={() => onLoadingComplete?.()}>
@@ -58,23 +66,20 @@ const HomePageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
             >
               {showVideo && (
                 <Video
+                  ref={videoRef}
                   loop={false}
                   src={optimizedVideoUrl}
                   className='absolute z-10 inset-0'
-                  onEnded={handleVideoEnd}
                 />
               )}
             </motion.div>
 
             {!showVideo && (
-              <div className='absolute-center w-full text-center'>
-                <AnimatedText
-                  per='char'
-                  preset='fade'
-                  className='w-full text-center'
-                >
+              <div className='w-full text-center absolute-center flex-center gap-1'>
+                <AnimatedText per='char' preset='fade'>
                   Setting stuff up
                 </AnimatedText>
+                <WavyEllipsis />
               </div>
             )}
           </motion.div>

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { anim, pageSlide, transition } from '@/lib/anim';
 import { useLocation } from 'react-router-dom';
 import { formatAltText, getYearFromUrl } from '@/lib/utils';
-import Image from '@/components/common/image';
+import ImageComponent from '@/components/common/image';
 import { AnimatedText } from '@/components/common/animated-text';
 
 interface PageLoaderProps {
@@ -13,23 +13,21 @@ interface PageLoaderProps {
 const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [showImage, setShowImage] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const location = useLocation();
   const year = getYearFromUrl(location.pathname);
 
-  const handleImageStart = () => {
-    setTimeout(() => {
-      setShowImage(true);
-    }, 3000);
-  };
-
   const handleImageEnd = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     setTimeout(() => {
       setIsVisible(false);
-    }, 6000);
+    }, 4500);
   };
 
-  const videoContainerVariants = {
+  const imageContainerVariants = {
     initial: {
       clipPath: 'inset(100% 0 0 0)',
     },
@@ -40,9 +38,40 @@ const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
   };
 
   useEffect(() => {
-    handleImageStart();
-    handleImageEnd();
-  }, []);
+    if (!year?.src) {
+      handleImageEnd();
+      return;
+    }
+
+    // Set up loading timeout
+    timeoutRef.current = setTimeout(() => {
+      console.log('Image loading timed out after 5 seconds');
+      handleImageEnd();
+    }, 5000);
+
+    // Preload the image
+    const img = new Image();
+    img.src = year.src;
+
+    const handleLoad = () => {
+      // Clear the timeout since image is ready
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      setShowImage(true);
+      handleImageEnd(); // Start the end timer once image is loaded
+    };
+
+    img.addEventListener('load', handleLoad);
+
+    // Cleanup
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      img.removeEventListener('load', handleLoad);
+    };
+  }, [year?.src]);
 
   return (
     <AnimatePresence mode='wait' onExitComplete={() => onLoadingComplete?.()}>
@@ -54,14 +83,14 @@ const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
           <motion.div className='flex flex-col-center relative w-full'>
             <motion.div
               className='w-[200px] h-[346px] relative'
-              variants={videoContainerVariants}
+              variants={imageContainerVariants}
               initial='initial'
               animate={showImage ? 'animate' : 'initial'}
             >
               {showImage && year && (
-                <Image
-                  src={year?.src}
-                  alt={formatAltText(year?.alt)}
+                <ImageComponent
+                  src={year.src}
+                  alt={formatAltText(year.alt)}
                   className='absolute z-10 inset-0 object-contain h-full'
                 />
               )}
@@ -74,7 +103,7 @@ const YearPageLoader = ({ onLoadingComplete }: PageLoaderProps) => {
                   preset='fade'
                   className='w-full text-center'
                 >
-                  {formatAltText(year?.alt) ?? ''}
+                  {formatAltText(year.alt) ?? ''}
                 </AnimatedText>
               </div>
             )}
