@@ -13,7 +13,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@googleapis/docs": "^3.3.0",
     "@graphcms/rich-text-react-renderer": "^0.6.2",
     "@icons-pack/react-simple-icons": "^10.0.0",
     "@radix-ui/react-hover-card": "^1.1.2",
@@ -25,7 +24,6 @@
     "cmdk": "^1.0.0",
     "framer-motion": "^11.5.4",
     "gsap": "^3.12.5",
-    "lenis": "^1.1.13",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-animated-cursor": "^2.11.2",

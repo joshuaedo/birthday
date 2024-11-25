@@ -6,7 +6,7 @@ export const siteConfig = {
     'Joshua Edo is an experienced Software Developer specialized in building web apps with great functionality, user-friendly interfaces, and strong SEO.',
   headline: 'How many days are left.',
   excerpt:
-    'This website is a special project by Joshua Edo to mark his birthday. It serves as a unique reminder of the day with a fun countdown feature.',
+    "Having a birthday at the year's end is the perfect excuse for a personal year-in-review. So, let's do that. This site is a *special one*, live only once a year on November 28th—my birthday.",
   url: 'https://birthday.joshuaedo.com',
   github: 'https://github.com/joshuaedo/birthday',
   creator: {
