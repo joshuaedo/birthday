@@ -12,8 +12,12 @@ const CountdownTimer = () => {
 
   function calculateTimeRemaining() {
     const currentDate = new Date();
-    const targetDate = new Date(currentDate.getFullYear(), 10, 28); // November is 10
-    targetDate.setFullYear(currentDate.getFullYear()); // Set the target year to the current year
+    let targetDate = new Date(currentDate.getFullYear(), 10, 28); // November is 10
+
+    // If the birthday has passed this year, set the target date to next year
+    if (currentDate > targetDate) {
+      targetDate = new Date(currentDate.getFullYear() + 1, 10, 28);
+    }
 
     const timeDifference = Number(targetDate) - Number(currentDate);
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
