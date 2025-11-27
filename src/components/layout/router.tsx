@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from '@/pages/home';
 import Page21 from '@/features/year/twenty-one/components/page';
 import { YearPageLayout } from '@/features/year/index/components/layout';
+import Page22 from '@/features/year/twenty-two/components/page';
 
 const Router = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const Router = () => {
       <Route path='/year' element={<YearPageLayout />}>
         <Route index element={<Navigate to='/' />} />
         <Route path='twenty-one' element={<Page21 />} />
+        <Route path='twenty-two' element={<Page22 />} />
       </Route>
     </Routes>
   );

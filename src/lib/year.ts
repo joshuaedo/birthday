@@ -252,6 +252,19 @@ const years = [
       top: '57.79340061665963%',
     },
   },
+  {
+    src: 'https://res.cloudinary.com/dnw9fplsw/image/upload/v1764278406/birthday.joshuaedo.com/home/22.webp',
+    alt: 'twenty-two',
+    id: 22,
+    hasReview: true,
+    style: {
+      transform:
+        'translate(2.724097417717233%, -1.4904258476458148%) rotate(7.279113555347536deg)',
+      zIndex: 21,
+      left: '53.84818744563472%',
+      top: '56.34916591421853%',
+    },
+  },
 ];
 
 export type Year = (typeof years)[number];

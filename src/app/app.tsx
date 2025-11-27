@@ -14,7 +14,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <div className='relative font-cormorant-garamond font-normal max-w-screen bg-primary text-tertiary'>
-        {!isBirthday ? (
+        {isBirthday ? (
           <CountdownTimer />
         ) : (
           <Providers>
